@@ -1,7 +1,7 @@
 # COHR Lab 11 sensitivity analysis
 
 Standalone extension of the unchanged Lab 10 model in `../Pro-Forma Financial Statements/proforma.COHR.py`.
-Uses the ranges locked in [the changed-input record](../Pro-Forma%20Financial%20Statements/Lab11_Locked_Changed_Input_Record_2026-09-29.md); no new company data or ranges.
+Uses the ranges locked in [the changed-input record](Lab11_Locked_Changed_Input_Record_2026-09-29.md); no new company data or ranges.
 
 Run from this folder with Python 3 (standard library only):
 
