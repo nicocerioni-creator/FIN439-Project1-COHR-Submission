@@ -102,3 +102,8 @@ OpenAI Codex prepared timestamped transcripts from the final Zoom VTT captions, 
 The finance tests were re-executed successfully during recording preparation, including the targeted funding-failure test and the two Video 1 checks. The +5 percentage-point growth stress has a FY2030 cash-floor shortfall of USD 313.79 million; its model failure is expected by the passing test. These remain AI-assisted verification activities.
 
 The new submission repository preserves prior Git history and packages the runnable source, historical labs, visible outputs, PDFs, source records, and transcripts. A dependency file explicitly states Python 3.10+ and standard-library-only application requirements. No credentials are required. Videos hosted in GitHub Pages are supplementary access copies; they do not establish compliance with the requirement for YouTube or an approved Purdue host. Student confirmation of official video URLs, transcript review, final finance judgments, and the Brightspace receipt is not asserted. The original Edition A and historical changed-input provenance qualifications above remain in force.
+
+
+### Official video URLs received during packaging
+
+Nicolas supplied these URLs in Video 1–3 order: https://youtu.be/RJJ-qHn8fPE, https://youtu.be/KrhwmjNDZBg, https://youtu.be/wsCrWOBVG38. Unauthenticated YouTube oEmbed checks returned the matching titles FIN439 Project 1 Video 1, 2 and 3, with author Nico Cer. These establish accessible metadata; full playback and visibility settings were not independently inspected. The manifest and portal use these official YouTube links. Caption-derived transcripts and final student review qualifications remain as stated above.
