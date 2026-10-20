@@ -1,0 +1,4 @@
+# Runtime: Python >=3.10
+# Application and finance tests use only the Python standard library.
+# No pip packages, credentials, or network access are required to reproduce output.
+# Optional document-build packages are separate from the valuation runtime.

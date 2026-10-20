@@ -1,0 +1,48 @@
+UTC run: 20261020T022118Z
+Source Python: 3.14.7 (v3.14.7:823f0323ee6, Aug  5 2026, 07:07:01) [Clang 21.0.0 (clang-2100.1.1.101)]
+Fresh copy: /var/folders/ft/s_1kn51j4dq14zb5tngkm0g00000gn/T/cohr-project1-cold-k0v74rqi/workspace
+No third-party packages installed; virtual environment created without pip.
+This is an AI-assisted cold run, NOT the student AI-off changed-input exercise.
+COMMAND: /Library/Frameworks/Python.framework/Versions/3.14/bin/python3 -m venv --without-pip /var/folders/ft/s_1kn51j4dq14zb5tngkm0g00000gn/T/cohr-project1-cold-k0v74rqi/environment
+
+
+EXIT: 0
+COMMAND: /var/folders/ft/s_1kn51j4dq14zb5tngkm0g00000gn/T/cohr-project1-cold-k0v74rqi/environment/bin/python project1/test_engine.py
+
+test_articulation_identity_bridge_and_restore (__main__.FinanceTests.test_articulation_identity_bridge_and_restore) ... ok
+test_known_answer_annuity_and_negative_cash (__main__.FinanceTests.test_known_answer_annuity_and_negative_cash) ... ok
+test_official_course_training_answers (__main__.FinanceTests.test_official_course_training_answers) ... ok
+test_predeclared_financial_directions (__main__.FinanceTests.test_predeclared_financial_directions) ... ok
+test_real_funding_failure_and_bad_input_rejected (__main__.FinanceTests.test_real_funding_failure_and_bad_input_rejected) ... ok
+test_reverse_price_reconstruction (__main__.FinanceTests.test_reverse_price_reconstruction) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.005s
+
+OK
+
+EXIT: 0
+COMMAND: /var/folders/ft/s_1kn51j4dq14zb5tngkm0g00000gn/T/cohr-project1-cold-k0v74rqi/environment/bin/python project1/engine.py
+# COHR provisional integrated FCFF output
+
+Valuation date and information cutoff: 2026-09-15.
+Generated during AI-assisted final preparation; not an AI-closed run or a historical submission receipt.
+
+Base diagnostic: $75.60 per actual common share; WACC 11.8%, g 3% (judgment-dependent).
+Enterprise value: $16,773.762m; common equity: $14,805.360m.
+Net claims: $1,968.402m; shares: 195.832246m.
+Terminal PV / EV: 87.40%. Checks: PASS.
+
+Visible outputs: /private/var/folders/ft/s_1kn51j4dq14zb5tngkm0g00000gn/T/cohr-project1-cold-k0v74rqi/workspace/outputs
+
+
+EXIT: 0
+COMMAND: /var/folders/ft/s_1kn51j4dq14zb5tngkm0g00000gn/T/cohr-project1-cold-k0v74rqi/environment/bin/python project1/app.py --export
+Saved executed base, statements, checks and sensitivities: /private/var/folders/ft/s_1kn51j4dq14zb5tngkm0g00000gn/T/cohr-project1-cold-k0v74rqi/workspace/outputs/project1-visible-output.html
+
+
+EXIT: 0
+Verified: base articulates, causal cases retained, sticky-capex stress fails, peer outputs present, static HTML exported.
+Source hashes: {"Pro-Forma Financial Statements/proforma.COHR.py": "e5c4345d841a1138350dec0b7fe3d02815313f93833cc6cac1d94db1eb0832ec", "project1/app.py": "f50c78c08f2701379f0ab70f4ab15f2aaf0c35d2bb4c036de8d0488dcfc6c6d3", "project1/engine.py": "ee0a99385fb5df267585574780727cef99f1270848e59a549ab4b5c3040461f6", "project1/research.py": "9f2df230031ac000cf817e14c72803f9c0a88385caa0cf20abc0898556cae630", "project1/test_engine.py": "d041d7cbdba2d3533e77eecb0629046ff6043935b419eeddeb7d016a9a234160"}
+Temporary environment/copy retained; no source file removed.
+FINAL STATUS: PASS

@@ -1,21 +1,31 @@
-"""Lab07: retrospective P/E comparison using frozen case inputs.
+"""Lab07: COHR reported annual P/E comparison as of September 15, 2026.
 
-Run: python3 ComparablePolicy_2026-09-15_Lab07.py
-Prices are December 31, 2024 closes; FY2024 earnings were reported later.
-This is not a point-in-time investment analysis. Keep price and EPS on the
-same stock-split basis. Use total GAAP diluted EPS, not adjusted EPS.
+Execution authorized by the user; retain excluded candidates for diagnostics.
+Prices: September 15, 2026 regular-session closes, USD per listed share.
+EPS: latest full-year GAAP diluted EPS public by that date; no adjusted EPS.
+Sources, periods, exclusions and unresolved checks: COHR_Lab07_Sources_2026-09-15.md.
 """
 
-# EDITABLE INPUTS: use ticker symbols as company identifiers.
-# Numeric strings preserve the exact input decimals; None means missing.
-TARGET = {"ticker": "ABG", "name": "Asbury Automotive",
-          "price": "243.03", "eps": "21.50"}
+# Numeric strings preserve input decimals; None means missing.
+VALUATION_DATE = "2026-09-15"
+TARGET = {"ticker": "COHR", "name": "Coherent Corp.",
+          "price": "271.17", "eps": "4.12",
+          "fiscal_year_end": "2026-06-30", "publication_date": "2026-08-12"}
 PEERS = [
-    {"ticker": "AN", "name": "AutoNation", "price": "169.84", "eps": "16.92",
-     "policy": "Use with caveat: AutoNation Finance adds lending exposure."},
-    {"ticker": "GPI", "name": "Group 1 Automotive", "price": "421.48", "eps": "36.81",
-     "policy": "Qualified: U.S./U.K. geography and 54 Inchcape dealerships acquired in 2024."},
+    {"ticker": "FN", "name": "Fabrinet", "price": "374.91", "eps": "13.05",
+     "fiscal_year_end": "2026-06-26", "publication_date": "2026-08-17",
+     "policy": "Qualify: optical manufacturing and datacenter/communications demand; "
+               "contract-manufacturing economics differ from COHR. "
+               "Exact comparison-date market-cap verification remains unresolved."},
+    {"ticker": "LITE", "name": "Lumentum Holdings Inc.",
+     "price": "838.96", "eps": "-92.96",
+     "fiscal_year_end": "2026-06-27", "publication_date": "2026-08-11",
+     "policy": "Qualify as business candidate: optical products, AI/network demand, "
+               "and manufacturing investment. Exclude from reported P/E: negative annual EPS.",
+     "eps_source": "FY2026 SEC 10-K, Item 8, Note 3, Earnings Per Share, p. 83"},
 ]
+# LITE is included for diagnostics only; pe() rejects its negative EPS.
+# It cannot enter the usable peer multiples, median, or implied valuation.
 
 from fractions import Fraction
 from statistics import median
@@ -57,18 +67,18 @@ def formatted(value, digits=2, signed=False):
 def main(target=None, peers=None):
     target = TARGET if target is None else target
     peers = PEERS if peers is None else peers
-    # Show the case peers first, using the same first-occurrence policy below.
-    for symbol, name in (("AN", "AutoNation"), ("GPI", "Group 1 Automotive")):
-        company = next((item for item in peers if ticker(item) == symbol), None)
-        multiple = pe(company) if company is not None and symbol != ticker(target) else None
-        result = (formatted(multiple, 6) + "x" if multiple is not None
-                  else "not meaningful (missing/invalid inputs or excluded peer)")
-        print(f"{name} P/E: {result}")
-    print()
-    print("ComparablePolicy | 2026-09-15 | Lab07")
-    print("Retrospective training comparison: 2024-12-31 prices and subsequently")
-    print("reported FY2024 total GAAP diluted EPS; matching stock-split bases.")
+    print(f"ComparablePolicy | {VALUATION_DATE} | Lab07")
+    print("September 15, 2026 closing prices; latest full-year GAAP diluted EPS")
+    print("public by that date. USD per listed share; no adjusted or quarterly EPS.")
     print("P/E is equity-to-equity: no cash/debt bridge.\n")
+
+    print("Input audit (USD per share):")
+    for company in [target, *peers]:
+        print(f"  {ticker(company)}: price=${company.get('price')}; "
+              f"annual reported diluted EPS=${company.get('eps')}; "
+              f"FY end={company.get('fiscal_year_end', 'unresolved')}; "
+              f"published={company.get('publication_date', 'unresolved')}")
+    print()
 
     # Deduplicate by normalized ticker; the first occurrence wins.
     unique = []
@@ -100,6 +110,8 @@ def main(target=None, peers=None):
         multiple = pe(company)
         print(f"{symbol}: {company.get('policy', 'Candidate peer')}")
         if multiple is None:
+            if company.get("eps_source"):
+                print(f"  EPS source: {company['eps_source']}")
             print("  P/E and peer-implied price: not meaningful "
                   "(missing, invalid, or nonpositive price/EPS).")
         else:
@@ -108,7 +120,7 @@ def main(target=None, peers=None):
                        if target_eps is not None else "not meaningful")
             print(f"  P/E: {formatted(multiple, 6)}x; implied target price: {implied}")
 
-    print(f"\nValid unique peers: {len(valid)}")
+    print(f"\nUnique peers with usable positive P/E inputs: {len(valid)}")
     full_estimate = None
     if not valid:
         print("No usable peers. No estimate.")
@@ -130,7 +142,8 @@ def main(target=None, peers=None):
                            if target_eps is not None else "not meaningful")
                 print(f"{label}: {formatted(multiple, 6)}x -> {implied}")
 
-    baseline_label = "two-peer midpoint" if len(valid) == 2 else "full-peer median estimate"
+    baseline_label = ("single-peer reference" if len(valid) == 1 else
+                      "two-peer midpoint" if len(valid) == 2 else "full-peer median estimate")
     print(f"\nPeer-removal sensitivity (change from {baseline_label}):")
     if full_estimate is not None:
         print(f"Baseline {baseline_label}: ${formatted(full_estimate)}")
